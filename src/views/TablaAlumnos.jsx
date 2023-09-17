@@ -3,7 +3,7 @@ import clienteAxios from '../config/axios';
 import { Card, Typography, Spinner } from "@material-tailwind/react";
 import { Link } from 'react-router-dom';
 
-const TABLE_HEAD = ["id","nombre", "edad", "imagen", "email", "direccion", "telefono", "cuatrimestre", "genero", "creación", 'acciones'];
+const TABLE_HEAD = ["id","nombre", "edad", "email", "direccion", "telefono", "carrera" ,"cuatrimestre", "genero", 'acciones'];
  
 
 const TablaAlumnos = () => {
@@ -16,7 +16,6 @@ const TablaAlumnos = () => {
       .then(({data}) => {
         setLoading(false)
         setUsers(data.data)
-        console.log(data.data)
       })
       .catch(() => {
         setLoading(false)
@@ -108,15 +107,6 @@ const TablaAlumnos = () => {
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {u.imagen}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
                       {u.email}
                     </Typography>
                   </td>
@@ -144,6 +134,15 @@ const TablaAlumnos = () => {
                       color="blue-gray"
                       className="font-normal"
                     >
+                      {u.carrera}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
                       {u.cuatrimestre}
                     </Typography>
                   </td>
@@ -154,15 +153,6 @@ const TablaAlumnos = () => {
                       className="font-normal"
                     >
                       {u.genero}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {u.created_at}
                     </Typography>
                   </td>
                   <td className={classes}>

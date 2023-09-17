@@ -6,20 +6,24 @@ import {
     Checkbox,
     Button,
     Typography,
-    Spinner
+    Spinner,
   } from "@material-tailwind/react";
 import { useNavigate, useParams } from 'react-router-dom';
 import clienteAxios from '../config/axios';
+import { useStateContext } from '../context/ContextProvider';
+
 
 const FormularioEstudiante = () => {
     let  { id } = useParams();
-    
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState(null);
+    const { setNotification } = useStateContext();
     const [user, setUser] = useState({
         id: null,
         nombre: '',
         edad: '',
+        carrear: '',
         imagen: '',
         email: '',
         direccion: '',
@@ -46,8 +50,29 @@ const FormularioEstudiante = () => {
         if(user.id) {
             clienteAxios.put(`/estudiantes/${id}`, user)
             .then(() => {
-
+                setNotification("El estudiante fue editado correctamente")
+                navigate('/tabla-alumnos')
             })
+            .catch((err) => {
+                console.log(err);
+                const response = err.response;
+                if (response && response.status === 422) {
+                  setErrors(response.data.errors);
+                }
+            });
+        } else {
+            clienteAxios.post(`/estudiantes`, user)
+            .then(() => {
+                setNotification("El estudiante fue creado correctamente")
+                navigate('/tabla-alumnos')
+            })
+            .catch((err) => {
+                console.log(err);
+                const response = err.response;
+                if (response && response.status === 422) {
+                  setErrors(response.data.errors);
+                }
+            });           
         }
     }
   return (
@@ -71,7 +96,7 @@ const FormularioEstudiante = () => {
             </div>
         }
         {!loading && 
-            <form className="mt-8 mb-2 w-80 max-w-screen-lg mx-auto sm:w-96">
+            <form onSubmit={onSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg mx-auto sm:w-96">
                 <div className="mb-4 flex flex-col gap-6">
                     <Input 
                         value={user.nombre} 
@@ -90,7 +115,13 @@ const FormularioEstudiante = () => {
                         size="lg" 
                         onChange={ev => setUser({...user, email: ev.target.value})} 
                         label="Email" 
-                    />           
+                    /> 
+                    <Input 
+                        value={user.carrera} 
+                        size="lg" 
+                        onChange={ev => setUser({...user, carrera: ev.target.value})} 
+                        label="Carrera" 
+                    />                   
                     <div className="grid md:grid-cols-2 md:gap-6">
                         <Input 
                             value={user.direccion} 
@@ -119,8 +150,9 @@ const FormularioEstudiante = () => {
                     </div>
                 </div>
 
-                <Button className="mt-6" fullWidth>
-                Registrar Alumno
+                <Button type='submit' className="mt-6" fullWidth>
+                {user.id && <h1>Editar Alumno</h1>}
+                {!user.id && <h1>Registrar alumno</h1>}
                 </Button>
             </form>
         }
