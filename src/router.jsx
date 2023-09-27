@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import TablaAlumnos from "./views/TablaAlumnos";
 import Profile from "./views/Perfil";
 import FormularioEstudiante from "./views/FormularioEstudiante";
+import AlumnosVista from "./views/Alumnos-vista";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: "/alumnos/:id",
                 element: <FormularioEstudiante key="studentUpdate" />
+            },
+            {
+                path: "/menu-alumno/:id",
+                element: <AlumnosVista />
             },
         ]
     },

@@ -157,6 +157,18 @@ const TablaAlumnos = () => {
                   </td>
                   <td className={classes}>
                     <div className="flex gap-4">
+                    <Typography
+                        as="a"
+                        href="#"
+                        variant="small"
+                        color="blue-gray"
+                        className="font-medium"
+                      >
+                        <Link to={"/menu-alumno/"+u.id} >
+                        Ver
+                        </Link>
+                        
+                      </Typography>
                       <Typography
                         as="a"
                         href="#"
