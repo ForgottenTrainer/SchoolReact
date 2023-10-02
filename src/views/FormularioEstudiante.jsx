@@ -23,7 +23,7 @@ const FormularioEstudiante = () => {
         id: null,
         nombre: '',
         edad: '',
-        carrear: '',
+        carrera: '',
         imagen: '',
         email: '',
         direccion: '',

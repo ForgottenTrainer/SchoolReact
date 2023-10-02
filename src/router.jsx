@@ -8,6 +8,8 @@ import TablaAlumnos from "./views/TablaAlumnos";
 import Profile from "./views/Perfil";
 import FormularioEstudiante from "./views/FormularioEstudiante";
 import AlumnosVista from "./views/Alumnos-vista";
+import FormularioDocente from "./views/docentes/FormularioDocente";
+import TableroDocente from "./views/docentes/TableroDocente";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: "/tabla-alumnos",
                 element: <TablaAlumnos/>
+            },
+            {
+                path: "/tabla-docentes",
+                element: <TableroDocente/>
             },
             {
                 path: "/registro",
@@ -41,6 +47,14 @@ const router = createBrowserRouter([
             {
                 path: "/menu-alumno/:id",
                 element: <AlumnosVista />
+            },
+            {
+                path: "/agregar-docente",
+                element: <FormularioDocente key="docenteCreate" />
+            },
+            {
+                path: "/docente/:id",
+                element: <FormularioDocente key="docenteUpdate" />
             },
         ]
     },

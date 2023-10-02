@@ -1,6 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import clienteAxios from '../config/axios';
+import { Link } from 'react-router-dom';
+
 
 const Dashboard = () => {
+  const [users, setUsers] = useState([]);
+  const [docentes, setDocentes] = useState([]);
+  
+  const getUsers = async () => {
+    await clienteAxios.get('/estudiantes')
+      .then(({data}) => {
+        //setLoading(false)
+        setUsers(data.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  const getDocentes = async () => {
+    await clienteAxios.get('/docentes')
+      .then(({data}) => {
+        //setLoading(false)
+        setDocentes(data.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+  useEffect(() => {
+    getUsers();
+  }, []); // Llama a getUsers al cargar el componente
+  
+  useEffect(() => {
+    getDocentes();
+  }, []); // Llama a getUsers al cargar el componente
+
+
   return (
     <div>
       <h1 className="text-4xl font-bold text-center mt-5 mb-10">Panel de control</h1>
@@ -20,9 +56,9 @@ const Dashboard = () => {
             </h4>
           </div>
           <div className="border-t border-blue-gray-50 p-4">
-            <a href="" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+            <Link to="" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
               Ir a la sección
-            </a>
+            </Link>
           </div>
         </div>
         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
@@ -36,13 +72,13 @@ const Dashboard = () => {
               Alumnos
             </p>
             <h4 className='block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900'>
-              90
+            {users.length}
             </h4>
           </div>
           <div className="border-t border-blue-gray-50 p-4">
-            <a href="" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+            <Link to="/tabla-alumnos" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
               Ir a la sección
-            </a>
+            </Link>
           </div>
         </div>
         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
@@ -56,13 +92,13 @@ const Dashboard = () => {
               Docentes
             </p>
             <h4 className='block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900'>
-              90
+              {docentes.length}
             </h4>
           </div>
           <div className="border-t border-blue-gray-50 p-4">
-            <a href="" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+            <Link to="" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
               Ir a la sección
-            </a>
+            </Link>
           </div>
         </div>
         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
@@ -80,9 +116,9 @@ const Dashboard = () => {
             </h4>
           </div>
           <div className="border-t border-blue-gray-50 p-4">
-            <a href="" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+            <Link to="" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
               Ir a la sección
-            </a>
+            </Link>
           </div>
         </div>
         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
@@ -100,9 +136,9 @@ const Dashboard = () => {
             </h4>
           </div>
           <div className="border-t border-blue-gray-50 p-4">
-            <a href="" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+            <Link className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
               Ir a la sección
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -12,7 +12,6 @@ export default function App() {
           <img src={blur} className="w-[90rem] opacity-60 flex-none max-w-none dark:block" alt="" />
         </div>
       </div>
-
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />}/>
