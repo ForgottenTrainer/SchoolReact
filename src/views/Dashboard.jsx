@@ -96,7 +96,7 @@ const Dashboard = () => {
             </h4>
           </div>
           <div className="border-t border-blue-gray-50 p-4">
-            <Link to="" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+            <Link to="/tabla-docentes" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
               Ir a la sección
             </Link>
           </div>

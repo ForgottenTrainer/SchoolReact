@@ -99,13 +99,13 @@ export function SidebarWithLogo() {
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                 </ListItemPrefix>
-                Cursos
+                Materia
               </ListItem>
               <ListItem>
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                 </ListItemPrefix>
-                Agregar Cursos
+                Agregar Materia
               </ListItem>
             </List>
           </AccordionBody>
