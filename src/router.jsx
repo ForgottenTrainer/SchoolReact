@@ -10,6 +10,9 @@ import FormularioEstudiante from "./views/FormularioEstudiante";
 import AlumnosVista from "./views/Alumnos-vista";
 import FormularioDocente from "./views/docentes/FormularioDocente";
 import TableroDocente from "./views/docentes/TableroDocente";
+import VistaDocentes from "./views/docentes/VistaDocentes";
+import TablaMaterias from "./views/materias/TablaMaterias";
+import FormularioMateria from "./views/materias/FormularioMateria";
 
 const router = createBrowserRouter([
     {
@@ -49,12 +52,28 @@ const router = createBrowserRouter([
                 element: <AlumnosVista />
             },
             {
+                path: "/menu-docente/:id",
+                element: <VistaDocentes />
+            },
+            {
                 path: "/agregar-docente",
                 element: <FormularioDocente key="docenteCreate" />
             },
             {
                 path: "/docente/:id",
                 element: <FormularioDocente key="docenteUpdate" />
+            },
+            {
+                path: "/tabla-materias/",
+                element: <TablaMaterias />
+            },
+            {
+                path: "/agregar-materia/",
+                element: <FormularioMateria key="materiaCreate" />
+            },
+            {
+                path: "/materias/:id",
+                element: <FormularioMateria key="materiaEdit" />
             },
         ]
     },

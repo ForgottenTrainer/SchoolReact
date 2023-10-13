@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [docentes, setDocentes] = useState([]);
+  const [materias, setMaterias] = useState([]);
   
   const getUsers = async () => {
     await clienteAxios.get('/estudiantes')
@@ -28,14 +29,29 @@ const Dashboard = () => {
         console.log(error)
       })
   }
+
+  const getMaterias = async () => {
+    await clienteAxios.get('/materias')
+      .then(({data}) => {
+        //setLoading(false)
+        setMaterias(data.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   useEffect(() => {
     getUsers();
   }, []); // Llama a getUsers al cargar el componente
   
   useEffect(() => {
     getDocentes();
-  }, []); // Llama a getUsers al cargar el componente
+  }, []); 
 
+  useEffect(() => {
+    getMaterias();
+  }, []); 
 
   return (
     <div>
@@ -52,11 +68,11 @@ const Dashboard = () => {
               Cursos
             </p>
             <h4 className='block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900'>
-              90
+              {materias.length}
             </h4>
           </div>
           <div className="border-t border-blue-gray-50 p-4">
-            <Link to="" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+            <Link to="/tabla-materias" className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
               Ir a la sección
             </Link>
           </div>

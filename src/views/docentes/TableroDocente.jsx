@@ -136,7 +136,7 @@ const TableroDocente = () => {
                   </td>
                   <td className={classes}>
                     <div className="flex gap-4">
-                    <Link to={"/menu-alumno/"+u.id} className="font-medium">
+                    <Link to={"/menu-docente/"+u.id} className="font-medium">
                       Ver
                     </Link>
 

@@ -5,6 +5,7 @@ import blur from "./../blur.png"
 import clienteAxios from '../config/axios';
 import { useEffect } from 'react';
 import { Alert } from "@material-tailwind/react"; 
+import toast, { Toaster } from 'react-hot-toast';
 
 function Icon() {
   return (
@@ -22,7 +23,6 @@ function Icon() {
     </svg>
   );
 }
- 
 
 const DefaultLayout = () => {
   const {user, token, setUser, notification} = useStateContext()
@@ -33,11 +33,14 @@ const DefaultLayout = () => {
         setUser(data);
       });
   }, []); 
-
+  useEffect(() => {
+    toast.success(notification)
+  }, [notification]);
   if (!token) {
     return <Navigate to="/login" />;
   }
-  
+
+
   return (
     <div id='defaultLayour' className="antialiased relative grid min-h-[100vh] w-screen p-8 bg-[#afd8ff20] ">
       <div className="absolute top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
@@ -50,14 +53,7 @@ const DefaultLayout = () => {
       <div className="p-4 sm:ml-64">
         <div className="content text-green-300">
           {notification &&
-            <div className="notification">
-              <Alert
-                icon={<Icon />}
-                className="rounded-none border-l-4 border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946]"
-              >
-                {notification}
-              </Alert>
-            </div>
+            <Toaster />
           }
         </div>
         <Outlet />

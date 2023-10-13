@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 
 import {
     Card,
@@ -73,6 +74,13 @@ const FormularioDocente = () => {
             });           
         }
     }
+    useEffect(() => {
+        if (errors) {
+          Object.keys(errors).forEach(key => {
+            toast.error(errors[key][0]); 
+          });
+        }
+    }, [errors]);
   return (
     <div>
         <Card color="transparent" shadow={false}>
@@ -86,13 +94,10 @@ const FormularioDocente = () => {
             {loading && (
                 <Spinner color="indigo" className="mx-auto" />
             )}
-            {errors && <div className='bg-red-500 uppercase text-white'>
-                {Object.keys(errors).map(key => (
-                    <p key={key}>{errors[key][0]}</p>
-                ))}
-                
-                </div>
+            {errors && 
+                <Toaster />
             }
+            
             {!loading && 
                 <form onSubmit={onSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg mx-auto sm:w-96">
                     <div className="mb-4 flex flex-col gap-6">
